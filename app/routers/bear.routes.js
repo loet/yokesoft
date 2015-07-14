@@ -1,5 +1,6 @@
 var router = require('express').Router(),
-    Bear = require('../models/bear');
+    bearService = require('../services/bear.services'),
+    Bear = require('../models/bear.models.js');
 
 
 // middleware to use for all requests
@@ -16,28 +17,26 @@ router.route('/')
 
     // create a bear (accessed at POST http://localhost:8080/api/bears)
     .post(function (req, res) {
-
-        var bear = new Bear();      // create a new instance of the Bear model
-        bear.name = req.body.name;  // set the bears name (comes from the request)
-
-        // save the bear and check for errors
-        bear.save(function (err) {
-            if (err)
+        bearService.create(req.body).then(
+            function (bear) {
+                console.log('bear: ' + bear);
+                res.json(bear);
+            },
+            function (err) {
                 res.send(err);
-
-            res.json({message: 'Bear created!'});
-        });
-
+            });
     })
+
     // get all the bears (accessed at GET http://localhost:8080/api/bears)
     .get(function (req, res) {
-        Bear.find(function (err, bears) {
-            if (err)
+        bearService.getAll().then(
+            function (bears) {
+                res.send(bears);
+            },
+            function (err) {
                 res.send(err);
-
-            res.json(bears);
-        });
-    });
+            });
+    })
 
 // on routes that end in /bears/:bear_id
 // ----------------------------------------------------

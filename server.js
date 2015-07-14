@@ -12,12 +12,12 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;        // set our port
 
-//ping api
-var pingRouter = require('./app/api/ping');
+//ping router
+var pingRouter = require('./app/routers/ping.routes');
 app.use('/api', pingRouter);
 
-//bear api
-var bearRouter = require('./app/api/bear');
+//bear router
+var bearRouter = require('./app/routers/bear.routes');
 app.use('/api/bears', bearRouter);
 
 
