@@ -16,6 +16,25 @@ exports.create = function (bear) {
     return promise;
 };
 
+exports.update = function (id, bear) {
+    var promise = new Promise(function (resolve, reject) {
+        Bear.findByIdAndUpdate(
+            id,
+            bear,
+            {new: true}, //--> with this option, updated user is returned
+            function (err, bear) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(bear);
+                }
+            }
+        );
+    });
+
+    return promise;
+};
+
 exports.getAll = function () {
     var promise = new Promise(function (resolve, reject) {
         Bear.find(function (err, bears) {
@@ -29,3 +48,35 @@ exports.getAll = function () {
 
     return promise;
 };
+
+exports.findById = function (id) {
+    var promise = new Promise(function (resolve, reject) {
+        Bear.findById(id, function (err, bear) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(bear);
+            }
+        });
+    });
+
+    return promise;
+};
+
+exports.remove = function(id) {
+    var promise = new Promise(function (resolve, reject) {
+        Bear.remove({_id: id}, function (err, bear) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(bear);
+            }
+        });
+    });
+
+    return promise;
+};
+
+
+
+
