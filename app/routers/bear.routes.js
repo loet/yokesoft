@@ -1,6 +1,5 @@
 var router = require('express').Router(),
-    bearService = require('../services/bear.services'),
-    Bear = require('../models/bear.models.js');
+    bearService = require('../services/bear.services');
 
 
 // middleware to use for all requests

@@ -1,4 +1,4 @@
-var Bear = require('../models/bear.models.js'),
+var Bear = require('../models/bear.models'),
     Promise = require('promise');
 
 exports.create = function (bear) {
