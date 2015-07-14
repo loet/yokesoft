@@ -36,7 +36,7 @@ router.route('/')
             function (err) {
                 res.status(500).send(err);
             });
-    })
+    });
 
 // on routes that end in /bears/:bear_id
 // ----------------------------------------------------
