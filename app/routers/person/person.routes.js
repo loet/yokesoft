@@ -1,5 +1,5 @@
 var router = require('express').Router(),
-    bearService = require('../services/bear.services');
+    personService = require('../../services/person/person.services');
 
 
 // middleware to use for all requests
@@ -10,42 +10,41 @@ router.use(function (req, res, next) {
 });
 
 
-// on routes that end in /bears
+// on routes that end in /persons
 // ----------------------------------------------------
 router.route('/')
 
-    // create a bear (accessed at POST http://localhost:8080/api/bears)
+    // create a bear (accessed at POST http://localhost:8080/api/persons)
     .post(function (req, res) {
-        bearService.create(req.body).then(
-            function (bear) {
-                console.log('bear: ' + bear);
-                res.json(bear);
+        personService.create(req.body).then(
+            function (person) {
+                res.json(person);
             },
             function (err) {
                 res.status(500).send(err);
             });
     })
 
-    // get all the bears (accessed at GET http://localhost:8080/api/bears)
+    // get all the bears (accessed at GET http://localhost:8080/api/persons)
     .get(function (req, res) {
-        bearService.getAll().then(
-            function (bears) {
-                res.send(bears);
+        personService.getAll().then(
+            function (persons) {
+                res.send(persons);
             },
             function (err) {
                 res.status(500).send(err);
             });
     });
 
-// on routes that end in /bears/:bear_id
+// on routes that end in /persons/:person_id
 // ----------------------------------------------------
-router.route('/:bear_id')
+router.route('/:person_id')
 
-    // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+    // get the bear with that id (accessed at GET http://localhost:8080/api/persons/:person_id)
     .get(function (req, res) {
-        bearService.findById(req.params.bear_id).then(
-            function (bear) {
-                res.json(bear);
+        personService.findById(req.params.person_id).then(
+            function (person) {
+                res.json(person);
             },
             function (err) {
                 res.status(500).send(err);
@@ -53,11 +52,11 @@ router.route('/:bear_id')
         );
     })
 
-    // update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
+    // update the bear with this id (accessed at PUT http://localhost:8080/api/persons/:person_id)
     .put(function (req, res) {
-        bearService.update(req.params.bear_id, req.body).then(
-            function (bear) {
-                res.json(bear);
+        personService.update(req.params.person_id, req.body).then(
+            function (person) {
+                res.json(person);
             },
             function (err) {
                 res.status(500).send(err);
@@ -65,9 +64,9 @@ router.route('/:bear_id')
         );
     })
 
-    // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
+    // delete the bear with this id (accessed at DELETE http://localhost:8080/api/persons/:person_id)
     .delete(function (req, res) {
-        bearService.remove(req.params.bear_id).then(
+        personService.remove(req.params.person_id).then(
             function (number) {
                 res.json(number);
             },

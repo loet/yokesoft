@@ -1,14 +1,14 @@
-var Bear = require('../models/bear.models'),
+var Person = require('../../models/person/person.models'),
     Promise = require('promise');
 
-exports.create = function (bear) {
+exports.create = function (newPerson) {
     var promise = new Promise(function (resolve, reject) {
-        var bear = new Bear(bear);
-        bear.save(function (err) {
+        var person = new Person(newPerson);
+        person.save(function (err) {
             if (err) {
                 reject(err);
             } else {
-                resolve(bear);
+                resolve(person);
             }
         });
     });
@@ -16,17 +16,17 @@ exports.create = function (bear) {
     return promise;
 };
 
-exports.update = function (id, bear) {
+exports.update = function (id, person) {
     var promise = new Promise(function (resolve, reject) {
-        Bear.findByIdAndUpdate(
+        Person.findByIdAndUpdate(
             id,
-            bear,
-            {new: true}, //--> with this option, updated user is returned
-            function (err, bear) {
+            person,
+            {new: true}, //--> with this option, updated person is returned
+            function (err, updatedPerson) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(bear);
+                    resolve(updatedPerson);
                 }
             }
         );
@@ -37,11 +37,11 @@ exports.update = function (id, bear) {
 
 exports.getAll = function () {
     var promise = new Promise(function (resolve, reject) {
-        Bear.find(function (err, bears) {
+        Person.find(function (err, persons) {
             if (err) {
                 reject(err);
             } else {
-                resolve(bears);
+                resolve(persons);
             }
         });
     });
@@ -51,11 +51,11 @@ exports.getAll = function () {
 
 exports.findById = function (id) {
     var promise = new Promise(function (resolve, reject) {
-        Bear.findById(id, function (err, bear) {
+        Person.findById(id, function (err, person) {
             if (err) {
                 reject(err);
             } else {
-                resolve(bear);
+                resolve(person);
             }
         });
     });
@@ -63,13 +63,13 @@ exports.findById = function (id) {
     return promise;
 };
 
-exports.remove = function(id) {
+exports.remove = function (id) {
     var promise = new Promise(function (resolve, reject) {
-        Bear.remove({_id: id}, function (err, bear) {
+        Person.remove({_id: id}, function (err, person) {
             if (err) {
                 reject(err);
             } else {
-                resolve(bear);
+                resolve(person);
             }
         });
     });
