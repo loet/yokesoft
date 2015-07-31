@@ -50,6 +50,11 @@ describe('Person Router Tests:', function () {
                                     .delete('/api/persons/' + id)
                                     .expect(200)
                                     .end(function (err, response) {
+                                        if (err) {
+                                            throw err;
+                                        }
+                                        should.not.exist(err);
+                                        should.equal(response.body.n, 1);
                                         done();
                                     });
                             })
