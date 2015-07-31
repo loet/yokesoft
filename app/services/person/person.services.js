@@ -1,8 +1,10 @@
 var Person = require('../../models/person/person.models'),
-    Promise = require('promise');
+    Promise = require('promise'),
+    _ = require('lodash');
 
 exports.create = function (newPerson) {
     var promise = new Promise(function (resolve, reject) {
+        newPerson.savedAt = new Date().getTime();
         var person = new Person(newPerson);
         person.save(function (err) {
             if (err) {
@@ -16,24 +18,39 @@ exports.create = function (newPerson) {
     return promise;
 };
 
-exports.update = function (id, person) {
+exports.update = function (id, updatedPerson) {
     var promise = new Promise(function (resolve, reject) {
-        Person.findByIdAndUpdate(
-            id,
-            person,
-            {new: true}, //--> with this option, updated person is returned
-            function (err, updatedPerson) {
+            Person.findById(id, function (err, foundPerson) {
                 if (err) {
                     reject(err);
+                } else if (foundPerson === null) {
+                    reject({message: "no person found with id: " + id});
                 } else {
-                    resolve(updatedPerson);
+                    //concurrency check
+                    if (updatedPerson.savedAt === foundPerson.savedAt) {
+                        updatedPerson.savedAt = new Date().getTime();
+                        _.merge(foundPerson, updatedPerson);
+                        foundPerson.save(function (err) {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(foundPerson);
+                            }
+                        });
+                    } else {
+                        reject({message: "can not modify because already modified"});
+                    }
                 }
-            }
-        );
-    });
+            });
+
+        }, function (err) {
+            reject(err);
+        }
+    );
 
     return promise;
 };
+
 
 exports.getAll = function () {
     var promise = new Promise(function (resolve, reject) {
@@ -54,6 +71,8 @@ exports.findById = function (id) {
         Person.findById(id, function (err, person) {
             if (err) {
                 reject(err);
+            } else if (person === null) {
+                reject({message: "no person found with id: " + id});
             } else {
                 resolve(person);
             }
@@ -65,11 +84,13 @@ exports.findById = function (id) {
 
 exports.remove = function (id) {
     var promise = new Promise(function (resolve, reject) {
-        Person.remove({_id: id}, function (err, person) {
+        Person.remove({_id: id}, function (err, result) {
             if (err) {
                 reject(err);
+            } else if (result && result.result && result.result.n === 0) {
+                reject({message: "could not remove person with id: " + id + " (because not found?)"});
             } else {
-                resolve(person);
+                resolve(result);
             }
         });
     });

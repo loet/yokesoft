@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
         street: String,
         zip: String,
         place: String,
-        country: String
+        country: String,
+        savedAt: {type: Number, required: true}
     });
 
 PersonSchema.path('email').index({unique: true});
