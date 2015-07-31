@@ -5,12 +5,12 @@ var should = require('should'),
 describe('Person Router Tests:', function () {
 
     it('should execute workflow', function (done) {
-        var id, savedAt;
+        var timestamp = new Date().getTime(), id, savedAt;
         /********** create person *************/
         request(app)
             .post('/api/persons')
             .set('Accept', 'application/json')
-            .send({email: 'loet@swissonline.ch'})
+            .send({email: timestamp + '@swissonline.ch'})
             .expect('Content-Type', 'application/json')
             .expect(200)
             .end(function (err, response) {
@@ -20,7 +20,7 @@ describe('Person Router Tests:', function () {
                 id = response.body._id;
                 savedAt = response.body.savedAt;
                 should.not.exist(err);
-                should.equal(response.body.email, 'loet@swissonline.ch');
+                should.equal(response.body.email, timestamp + '@swissonline.ch');
                 /********** get created person *************/
                 request(app)
                     .get('/api/persons/' + id)
@@ -31,12 +31,12 @@ describe('Person Router Tests:', function () {
                             throw err;
                         }
                         should.not.exist(err);
-                        should.equal(response.body.email, 'loet@swissonline.ch');
+                        should.equal(response.body.email, timestamp + '@swissonline.ch');
                         /********** update person *************/
                         request(app)
                             .put('/api/persons/' + id)
                             .set('Accept', 'application/json')
-                            .send({email: 'loetupdated@swissonline.ch', savedAt: savedAt})
+                            .send({email: timestamp + 'loetupdated@swissonline.ch', savedAt: savedAt})
                             .expect('Content-Type', 'application/json')
                             .expect(200)
                             .end(function (err, response) {
@@ -44,7 +44,7 @@ describe('Person Router Tests:', function () {
                                     throw err;
                                 }
                                 should.not.exist(err);
-                                should.equal(response.body.email, 'loetupdated@swissonline.ch');
+                                should.equal(response.body.email, timestamp + 'loetupdated@swissonline.ch');
                                 /********** remove person *************/
                                 request(app)
                                     .delete('/api/persons/' + id)
