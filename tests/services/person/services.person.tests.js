@@ -2,6 +2,7 @@ var should = require('should'),
     Person = require('../../../app/models/person/person.models'),
     personService = require('../../../app/services/person/person.services');
 
+require('../../../app/config/mongodb');
 
 describe('Person Service Unit Tests:', function () {
     var timestamp = new Date().getTime(), person, id, savedAt, id2;

@@ -1,8 +1,7 @@
 var should = require('should'),
     Person = require('../../../app/models/person/person.models');
 
-require('mongoose')
-    .connect('mongodb://localhost:27017/yokesoft');
+require('../../../app/config/mongodb');
 
 describe('Person Model Unit Tests: ', function () {
     var timestamp = new Date().getTime(), person, id;

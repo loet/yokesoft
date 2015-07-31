@@ -16,6 +16,8 @@ app.use('/api', pingRouter);
 personRouter = require('./app/routers/person/person.routes');
 app.use('/api/persons', personRouter);
 
+module.exports = app;
+
 
 // START THE SERVER
 port = process.env.PORT || 8080;        // set our port
