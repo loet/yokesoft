@@ -1,5 +1,5 @@
 var router = require('express').Router(),
-    pingService = require('../services/ping.services');
+    pingService = require('../services/ping.services.js');
 
 router.route('/')
     .get(function (req, res) {

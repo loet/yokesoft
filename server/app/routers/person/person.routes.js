@@ -1,5 +1,5 @@
 var router = require('express').Router(),
-    personService = require('../../services/person/person.services');
+    personService = require('../../services/person/person.services.js');
 
 
 // middleware to use for all requests

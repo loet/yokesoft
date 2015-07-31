@@ -1,4 +1,4 @@
-var Person = require('../../models/person/person.models'),
+var Person = require('../../models/person/person.models.js'),
     Promise = require('promise'),
     _ = require('lodash');
 

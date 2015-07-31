@@ -9,11 +9,11 @@ app.use(bodyParser.json());
 require('./app/config/mongodb');
 
 //ping router
-pingRouter = require('./app/routers/ping.routes');
+pingRouter = require('./app/routers/ping.routes.js');
 app.use('/api', pingRouter);
 
 //person router
-personRouter = require('./app/routers/person/person.routes');
+personRouter = require('./app/routers/person/person.routes.js');
 app.use('/api/persons', personRouter);
 
 module.exports = app;
