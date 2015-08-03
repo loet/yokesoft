@@ -1,4 +1,5 @@
-var app = require('express')(),        // init call express
+var express = require('express'),
+    app = express(),
     bodyParser = require('body-parser'),
     port, pingRouter, personRouter;
 
@@ -16,10 +17,14 @@ app.use('/api', pingRouter);
 personRouter = require('./app/routers/person/person.routes.js');
 app.use('/api/persons', personRouter);
 
+//app.use('/frontend', express.static('./frontend'));
+app.use(express.static('./frontend'));
+app.use('/dev', express.static('./../frontend/app'));
+
 module.exports = app;
 
 
 // START THE SERVER
-port = process.env.PORT || 8080;        // set our port
+port = process.env.PORT || 3000;        // set our port
 app.listen(port);
 console.log('Server running on port ' + port);
