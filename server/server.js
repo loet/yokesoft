@@ -7,24 +7,27 @@ var express = require('express'),
 app.use(bodyParser.json());
 
 //connect to db
-require('./app/config/mongodb');
+require('./backend/app/config/mongodb');
 
 //ping router
-pingRouter = require('./app/routers/ping.routes.js');
+pingRouter = require('./backend/app/routers/ping.routes.js');
 app.use('/api', pingRouter);
 
 //person router
-personRouter = require('./app/routers/person/person.routes.js');
+personRouter = require('./backend/app/routers/person/person.routes.js');
 app.use('/api/persons', personRouter);
 
-//app.use('/frontend', express.static('./frontend'));
-app.use(express.static('./frontend'));
-app.use('/dev', express.static('./../frontend/app'));
+/* production mode */
+//app.use(express.static('./frontend/dist'));
+
+/* dev mode */
+app.use(express.static('./frontend/app'));
+app.use('/bower_components', express.static('./frontend/bower_components'));
 
 module.exports = app;
 
 
 // START THE SERVER
-port = process.env.PORT || 3000;        // set our port
+port = process.env.PORT || 8080;        // set our port
 app.listen(port);
 console.log('Server running on port ' + port);
