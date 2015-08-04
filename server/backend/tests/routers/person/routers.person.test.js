@@ -1,6 +1,6 @@
 var should = require('should'),
     request = require('supertest'),
-    app = require('../../../server');
+    app = require('../../../../server');
 
 describe('Person Router Tests:', function () {
 
