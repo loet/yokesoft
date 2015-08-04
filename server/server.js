@@ -1,5 +1,6 @@
 var express = require('express'),
     app = express(),
+    livereload = require('express-livereload'),
     bodyParser = require('body-parser'),
     port, pingRouter, personRouter;
 
@@ -23,6 +24,7 @@ app.use('/api/persons', personRouter);
 /* dev mode */
 app.use(express.static('./frontend/app'));
 app.use('/bower_components', express.static('./frontend/bower_components'));
+livereload(app, config={watchDir: './frontend/app'});
 
 module.exports = app;
 
