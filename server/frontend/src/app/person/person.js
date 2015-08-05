@@ -7,75 +7,17 @@ angular.module('yokesoft.person', [])
                 controller: 'PersonListCtrl'
             });
     })
-    .controller('PersonListCtrl', function ($scope, $mdDialog, $http) {
+    .controller('PersonListCtrl', function ($scope, $mdDialog, PersonIntegrationService) {
 
         $scope.persons = [];
-        $scope.persons.push({
-            email: 'loet@swissonline.ch',
-            firstname: 'Ueli',
-            lastname: 'Loetscher',
-            savedAt: new Date(1438351824624)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
-        $scope.persons.push({
-            email: 'rado@swissonline.ch',
-            firstname: 'Rado',
-            lastname: 'Smar',
-            savedAt: new Date(1438351824628)
-        });
+
+        PersonIntegrationService.getAllPersons()
+            .then(function (persons) {
+                $scope.persons = persons;
+            }, function (error) {
+                console.log(error);
+            });
+
 
         $scope.navigateTo = function (to, event) {
             $mdDialog.show(
@@ -86,6 +28,25 @@ angular.module('yokesoft.person', [])
                     .ok('Neat!')
                     .targetEvent(event)
             );
+        };
+    })
+
+    .factory('PersonIntegrationService', function ($q, $http) {
+
+        function getAllPersons() {
+            var dfd = $q.defer();
+            $http.get('/api/persons').
+                then(function (response) {
+                    dfd.resolve(response.data);
+                }, function (response) {
+                    dfd.reject(response);
+                });
+            return dfd.promise;
+        }
+
+
+        return {
+            getAllPersons: getAllPersons
         };
     })
 ;

@@ -3,10 +3,10 @@ var mongoose = require('mongoose'),
     PersonSchema = new Schema({
         email: {type: String, required: true},
         firstname: String,
-        lastname: String,
+        lastname: {type: String, required: true},
         street: String,
         zip: String,
-        place: String,
+        place: {type: String, required: true},
         country: String,
         savedAt: {type: Number, required: true}
     });

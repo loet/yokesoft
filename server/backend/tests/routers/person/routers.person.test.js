@@ -10,7 +10,7 @@ describe('Person Router Tests:', function () {
         request(app)
             .post('/api/persons')
             .set('Accept', 'application/json')
-            .send({email: timestamp + '@swissonline.ch'})
+            .send({lastname: "thelastname",place: "theplace", email: timestamp + '@swissonline.ch'})
             .expect('Content-Type', 'application/json')
             .expect(200)
             .end(function (err, response) {

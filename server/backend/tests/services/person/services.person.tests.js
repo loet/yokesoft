@@ -8,7 +8,7 @@ describe('Person Service Unit Tests:', function () {
     var timestamp = new Date().getTime(), person, id, savedAt, id2;
 
     beforeEach(function (done) {
-        person = new Person({email: timestamp + '@swissonline.ch', savedAt: new Date().getTime()});
+        person = new Person({lastname: "thelastname", place: "theplace", email: timestamp + '@swissonline.ch', savedAt: timestamp});
         person.save(function (err, saved) {
             id = saved.id;
             savedAt = saved.savedAt;
@@ -18,7 +18,11 @@ describe('Person Service Unit Tests:', function () {
 
     describe('create tests', function () {
         it('should create person', function (done) {
-            personService.create({email: timestamp + 'unique@swissonline.ch'})
+            personService.create({
+                lastname: "thelastname",
+                place: "theplace",
+                email: timestamp + 'unique@swissonline.ch'
+            })
                 .then(function (person) {
                     id2 = person.id;
                     should.equal(person.email, timestamp + 'unique@swissonline.ch');
@@ -29,7 +33,12 @@ describe('Person Service Unit Tests:', function () {
                 });
         });
         it('should keep emails unique', function (done) {
-            personService.create({email: timestamp + '@swissonline.ch'})
+            personService.create({
+                lastname: "thelastname",
+                "place": "theplace",
+                email: timestamp + '@swissonline.ch',
+                savedAt: new Date().getTime()
+            })
                 .then(function (person) {
                     should.not.exist(person);
                 }, function (err) {
@@ -41,7 +50,12 @@ describe('Person Service Unit Tests:', function () {
 
     describe('update tests', function () {
         it('should update person', function (done) {
-            personService.update(id, {email: 'updated@swissonline.ch', savedAt: savedAt}).
+            personService.update(id, {
+                lastname: "thelastname",
+                "place": "theplace",
+                email: 'updated@swissonline.ch',
+                savedAt: savedAt
+            }).
                 then(function (person) {
                     should.equal(person.email, 'updated@swissonline.ch');
                     done();
@@ -50,7 +64,12 @@ describe('Person Service Unit Tests:', function () {
                 });
         });
         it('should check for concurrent modifications', function () {
-            personService.update(id, {email: 'updated2@swissonline.ch', savedAt: 123456789}).
+            personService.update(id, {
+                lastname: "thelastname",
+                "place": "theplace",
+                email: timestamp + '@swissonline.ch',
+                savedAt: 123456789
+            }).
                 then(function (person) {
                     should.not.exist(person);
                 }, function (err) {
@@ -59,7 +78,12 @@ describe('Person Service Unit Tests:', function () {
                 });
         });
         it('should keep emails unique', function (done) {
-            personService.create({email: timestamp + 'unique@swissonline.ch'})
+            personService.create({
+                lastname: "thelastname",
+                "place": "theplace",
+                email: timestamp + 'unique@swissonline.ch',
+                savedAt: new Date().getTime()
+            })
                 .then(function (person) {
                     id2 = person.id;
                     personService.update(id, {email: timestamp + 'unique@swissonline.ch', savedAt: savedAt})

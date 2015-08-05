@@ -7,7 +7,7 @@ describe('Person Model Unit Tests: ', function () {
     var timestamp = new Date().getTime(), person, id;
 
     beforeEach(function (done) {
-        person = new Person({email: timestamp + '@swissonline.ch', savedAt: new Date().getTime()});
+        person = new Person({lastname: "thelastname","place": "theplace", email: timestamp + '@swissonline.ch', savedAt: new Date().getTime()});
         person.save(function (err, saved) {
             id = saved.id;
             done();
