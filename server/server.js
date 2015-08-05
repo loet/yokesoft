@@ -22,9 +22,8 @@ app.use('/api/persons', personRouter);
 //app.use(express.static('./frontend/dist'));
 
 /* dev mode */
-app.use(express.static('./frontend/app'));
-app.use('/bower_components', express.static('./frontend/bower_components'));
-livereload(app, config={watchDir: './frontend/app'});
+app.use(express.static('./frontend/build'));
+livereload(app, config={watchDir: './frontend/build'});
 
 module.exports = app;
 
