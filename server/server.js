@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+
 var express = require('express'),
     app = express(),
     livereload = require('express-livereload'),
@@ -18,12 +20,17 @@ app.use('/api', pingRouter);
 personRouter = require('./backend/app/routers/person/person.routes.js');
 app.use('/api/persons', personRouter);
 
-/* production mode */
-//app.use(express.static('./frontend/dist'));
 
-/* dev mode */
-app.use(express.static('./frontend/build'));
-livereload(app, config={watchDir: './frontend/build'});
+if (process.env.NODE_ENV === 'development') {
+    /* dev mode */
+    app.use(express.static('./frontend/build'));
+    livereload(app, config = {watchDir: './frontend/build'});
+    console.log('using watching frontend build');
+} else {
+    /* production mode */
+    app.use(express.static('./frontend/dist'));
+    console.log('using frontend dist');
+}
 
 module.exports = app;
 
