@@ -1,12 +1,9 @@
 {
-  "name": "ashtangayoga",
+  "name": "yokesoft",
   "version": "0.0.1",
-  "devDependencies": {
-    "angular": "1.4.3",
-    "angular-mocks": "1.4.3",
-    "bootstrap": "~3.1",
-    "angular-bootstrap": "~0.10.0",
-    "angular-ui-router": "~0.2"
-  },
-  "dependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-material": "~0.10.0"
+  }
 }
