@@ -249,7 +249,8 @@ module.exports = function (grunt) {
             },
             compile: {
                 files: {
-                    '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': '<%= app_files.less %>'
+                    //we assue, that build runs before compile, so we compile the build css
+                    '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
                 },
                 options: {
                     cleancss: true,
@@ -384,7 +385,6 @@ module.exports = function (grunt) {
                 dir: '<%= compile_dir %>',
                 src: [
                     '<%= concat.compile_js.dest %>',
-                    '<%= vendor_files.css %>',
                     '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
                 ]
             }
@@ -560,7 +560,7 @@ module.exports = function (grunt) {
      * minifying your code.
      */
     grunt.registerTask('compile', [
-        'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
+       'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
 
     /**

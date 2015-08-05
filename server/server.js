@@ -19,11 +19,11 @@ personRouter = require('./backend/app/routers/person/person.routes.js');
 app.use('/api/persons', personRouter);
 
 /* production mode */
-//app.use(express.static('./frontend/dist'));
+app.use(express.static('./frontend/dist'));
 
 /* dev mode */
-app.use(express.static('./frontend/build'));
-livereload(app, config={watchDir: './frontend/build'});
+//app.use(express.static('./frontend/build'));
+//livereload(app, config={watchDir: './frontend/build'});
 
 module.exports = app;
 
