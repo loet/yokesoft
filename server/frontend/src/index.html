@@ -16,51 +16,52 @@
 
 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
             md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar ng-controller="LeftCtrl">
-            <h1 class="md-toolbar-tools"><a href="#/" ng-click="closeNavigation()">Yokesoft</a></h1>
-        </md-toolbar>
-        <md-content layout-padding ng-controller="LeftCtrl">
-            <!--<md-button ng-click="closeNavigation()" class="md-primary" hide-gt-md>-->
-            <!--Close Sidenav Left-->
-            <!--</md-button>-->
-            <!--<p hide-md hide-sm>-->
-            <!--gt md now-->
-            <!--</p>-->
+    <md-toolbar ng-controller="LeftCtrl">
+        <h1 class="md-toolbar-tools"><a href="#/" ng-click="closeNavigation()">Yokesoft</a></h1>
+    </md-toolbar>
+    <md-content layout-padding ng-controller="LeftCtrl">
+        <!--<md-button ng-click="closeNavigation()" class="md-primary" hide-gt-md>-->
+        <!--Close Sidenav Left-->
+        <!--</md-button>-->
+        <!--<p hide-md hide-sm>-->
+        <!--gt md now-->
+        <!--</p>-->
 
-            <!--<p hide-gt-md>-->
-            <!--lt md now-->
-            <!--</p>-->
-
+        <!--<p hide-gt-md>-->
+        <!--lt md now-->
+        <!--</p>-->
+        <nav class="leftnav">
             <ul>
                 <li><a href="#/personlist" ng-click="closeNavigation()">Personen</a></li>
             </ul>
+        </nav>
 
-            <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-            <!--</p>-->
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
 
-            <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-            <!--</p>-->
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
 
-            <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-            <!--</p>-->
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
 
-            <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-                <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
-            <!--</p>-->
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
 
 
-        </md-content>
+    </md-content>
 </md-sidenav>
 
 <div layout="column" role="main" flex ng-view>
