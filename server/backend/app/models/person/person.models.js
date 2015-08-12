@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
         zip: String,
         place: {type: String, required: true},
         country: String,
+        remarks: String,
         savedAt: {type: Number, required: true}
     });
 
