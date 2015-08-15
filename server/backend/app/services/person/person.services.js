@@ -30,6 +30,7 @@ exports.update = function (id, updatedPerson) {
                     if (updatedPerson.savedAt === foundPerson.savedAt) {
                         updatedPerson.savedAt = new Date().getTime();
                         _.merge(foundPerson, updatedPerson);
+                        foundPerson.markModified('teacherqualifications');
                         foundPerson.save(function (err) {
                             if (err) {
                                 reject(err);

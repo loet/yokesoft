@@ -9,6 +9,9 @@ var mongoose = require('mongoose'),
         place: {type: String, required: true},
         country: String,
         remarks: String,
+        teacher: Boolean,
+        student: Boolean,
+        teacherqualifications: [String],
         savedAt: {type: Number, required: true}
     });
 
