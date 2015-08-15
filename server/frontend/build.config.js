@@ -66,7 +66,8 @@ module.exports = {
             'vendor/angular-route/angular-route.js',
             'vendor/angular-aria/angular-aria.js',
             'vendor/angular-animate/angular-animate.js',
-            'vendor/angular-material/angular-material.js'
+            'vendor/angular-material/angular-material.js',
+            'vendor/lodash/lodash.js'
         ],
         css: [
             'vendor/angular-material/angular-material.css'

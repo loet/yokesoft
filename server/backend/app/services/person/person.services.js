@@ -29,6 +29,7 @@ exports.update = function (id, updatedPerson) {
                     //concurrency check
                     if (updatedPerson.savedAt === foundPerson.savedAt) {
                         updatedPerson.savedAt = new Date().getTime();
+                        foundPerson.teacherqualifications = undefined;
                         _.merge(foundPerson, updatedPerson);
                         foundPerson.markModified('teacherqualifications');
                         foundPerson.save(function (err) {

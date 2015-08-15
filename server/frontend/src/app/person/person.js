@@ -32,7 +32,7 @@ angular.module('yokesoft.person', [])
                 controller: 'PersonCtrl',
                 resolve: {
                     person: function () {
-                        return {};
+                        return {student: true};
                     }
                 }
             });
@@ -55,11 +55,33 @@ angular.module('yokesoft.person', [])
     })
 
     .controller('PersonCtrl', function ($scope, $log, $mdToast, $mdDialog, $location, person, PersonIntegrationService) {
+        var i;
         $scope.person = person;
 
+        $scope.teacherqualifications = ['Ashtanga', 'Jivamukti', 'Pranayama', 'Introduction', 'Anatomy', 'Philosophy'];
+        $scope.selectedteacherqualification = {};
+
+        for (i = 0; $scope.person.teacherqualifications && i < $scope.person.teacherqualifications.length; i++) {
+            $scope.selectedteacherqualification[$scope.person.teacherqualifications[i]] = true;
+        }
+
+        $scope.processTeacherSelection = function () {
+            if ($scope.person.teacher === false) {
+                $scope.selectedteacherqualification = undefined;
+                $scope.person.teacherqualifications = undefined;
+            }
+        };
+
         $scope.savePerson = function () {
-            var personForm = $scope.personForm;
+            var personForm = $scope.personForm, prop;
             if (personForm.$valid) {
+                //convert teacherqualifaction into array
+                $scope.person.teacherqualifications = [];
+                for (prop in $scope.selectedteacherqualification) {
+                    if ($scope.selectedteacherqualification[prop] === true) {
+                        $scope.person.teacherqualifications.push(prop);
+                    }
+                }
                 if ($scope.person._id) {
                     PersonIntegrationService.updatePerson($scope.person).then(function () {
                         $location.url('/personlist');
