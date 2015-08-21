@@ -58,9 +58,13 @@ angular.module('yokesoft.person', [])
         $scope.persons = PersonCache.getPersons();
 
         $scope.$on('person', function (event, msg) {
-            if ('created' === msg.action) {
+            if ('created' === msg.action || 'updated' === msg.action) {
                 msg.data.realtime = true;
                 PersonCache.addPerson(msg.data);
+                $location.url('/personlistrefresh?' + new Date().getTime());
+                $route.reload();
+            } else if ('removed' === msg.action) {
+                PersonCache.removePerson(msg.data);
                 $location.url('/personlistrefresh?' + new Date().getTime());
                 $route.reload();
             }
@@ -164,6 +168,14 @@ angular.module('yokesoft.person', [])
         var personCache = [];
 
         function addPerson(person) {
+            var i;
+            for (i = 0; i < personCache.length; i++) {
+                if (personCache[i]._id === person._id) {
+                    personCache[i] = person;
+                    return;
+                }
+            }
+            //no update, add:
             personCache.unshift(person);
         }
 
@@ -179,10 +191,21 @@ angular.module('yokesoft.person', [])
             return personCache;
         }
 
+        function removePerson(id) {
+            var i;
+            for (i = 0; i < personCache.length; i++) {
+                if (personCache[i]._id === id) {
+                    personCache.splice(i, 1);
+                    return;
+                }
+            }
+        }
+
         return {
             addPerson: addPerson,
             setPersons: setPersons,
-            getPersons: getPersons
+            getPersons: getPersons,
+            removePerson: removePerson
         };
     })
 

@@ -22,10 +22,8 @@
                       ng-click="navigateTo(person)">
             <img ng-src="assets/img/cat.jpeg" class="md-avatar" alt="{{person.email}}"/>
 
-            <div class="md-list-item-text">
-                <h3 ng-if="person.realtime" style="font-style: italic">{{ person.firstname }} {{person.lastname}}</h3>
-
-                <h3 ng-if="!person.realtime">{{ person.firstname }} {{person.lastname}}</h3>
+            <div class="md-list-item-text" ng-class="{'realtimeentry': person.realtime}">
+                <h3>{{ person.firstname }} {{person.lastname}}</h3>
 
                 <h4>{{ person.street }}{{person.street ? ',': ''}} {{ person.zip }} {{ person.place }}</h4>
 

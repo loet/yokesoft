@@ -38,6 +38,7 @@ exports.update = function (id, updatedPerson) {
                             if (err) {
                                 reject(err);
                             } else {
+                                io.emit('person', {action: 'updated', data: foundPerson});
                                 resolve(foundPerson);
                             }
                         });
@@ -94,6 +95,7 @@ exports.remove = function (id) {
             } else if (result && result.result && result.result.n === 0) {
                 reject({message: "could not remove person with id: " + id + " (because not found?)"});
             } else {
+                io.emit('person', {action: 'removed', data: id});
                 resolve(result);
             }
         });
