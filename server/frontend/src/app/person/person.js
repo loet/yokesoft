@@ -59,6 +59,7 @@ angular.module('yokesoft.person', [])
 
         $scope.$on('person', function (event, msg) {
             if ('created' === msg.action) {
+                msg.data.realtime = true;
                 PersonCache.addPerson(msg.data);
                 $location.url('/personlistrefresh?' + new Date().getTime());
                 $route.reload();
