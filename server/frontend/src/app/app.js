@@ -1,4 +1,5 @@
 angular.module('yokesoft', [
+    'yokesoft.socket',
     'ngRoute',
     'ngMaterial',
     'templates-app',
@@ -19,7 +20,9 @@ angular.module('yokesoft', [
             });
     })
 
-    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $mdUtil, $log) {
+
+    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $mdUtil, $log, SocketIOListener) {
+        SocketIOListener.connect();
         $scope.toggleLeft = buildToggler('left');
         /**
          * Build handler to open/close a SideNav; when animation finishes
