@@ -1,6 +1,7 @@
 var Person = require('../../models/person/person.models.js'),
     Promise = require('promise'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    io = require('../../../app/config/socket.io').io;
 
 exports.create = function (newPerson) {
     var promise = new Promise(function (resolve, reject) {
@@ -10,6 +11,7 @@ exports.create = function (newPerson) {
             if (err) {
                 reject(err);
             } else {
+                io.emit('person', {action: 'created', data: person});
                 resolve(person);
             }
         });

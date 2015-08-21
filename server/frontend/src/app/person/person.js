@@ -4,7 +4,23 @@ angular.module('yokesoft.person', [])
         $routeProvider.
             when('/personlist', {
                 templateUrl: 'person/personlist.tpl.html',
-                controller: 'PersonListCtrl'
+                controller: 'PersonListCtrl',
+                resolve: {
+                    refresh: function () {
+                        return false;
+                    }
+                }
+            });
+
+        $routeProvider.
+            when('/personlistrefresh', {
+                templateUrl: 'person/personlist.tpl.html',
+                controller: 'PersonListCtrl',
+                resolve: {
+                    refresh: function () {
+                        return true;
+                    }
+                }
             });
 
         $routeProvider.
@@ -37,17 +53,27 @@ angular.module('yokesoft.person', [])
                 }
             });
     })
-    .controller('PersonListCtrl', function ($scope, PersonIntegrationService, $location) {
+    .controller('PersonListCtrl', function ($scope, PersonIntegrationService, PersonCache, $location, $route, refresh) {
 
-        $scope.persons = [];
+        $scope.persons = PersonCache.getPersons();
 
-        PersonIntegrationService.getAllPersons()
-            .then(function (persons) {
-                $scope.persons = persons;
-            }, function (error) {
-                console.log(error);
-            });
+        $scope.$on('person', function (event, msg) {
+            if ('created' === msg.action) {
+                PersonCache.addPerson(msg.data);
+                $location.url('/personlistrefresh?' + new Date().getTime());
+                $route.reload();
+            }
+        });
 
+        if (!refresh) {
+            PersonIntegrationService.getAllPersons()
+                .then(function (persons) {
+                    PersonCache.setPersons(persons);
+                    $scope.persons = PersonCache.getPersons();
+                }, function (error) {
+                    console.log(error);
+                });
+        }
 
         $scope.navigateTo = function (person) {
             $location.url('/person/' + person._id);
@@ -58,7 +84,7 @@ angular.module('yokesoft.person', [])
         var i;
         $scope.person = person;
 
-        $scope.teacherqualifications = ['Ashtanga', 'Jivamukti', 'Pranayama', 'Introduction', 'Anatomy', 'Philosophy'];
+        $scope.teacherqualifications = ['Denken', 'Handeln', 'Kochen', 'Tanzen', 'Korrigieren', 'Surfen'];
         $scope.selectedteacherqualification = {};
 
         for (i = 0; $scope.person.teacherqualifications && i < $scope.person.teacherqualifications.length; i++) {
@@ -130,6 +156,32 @@ angular.module('yokesoft.person', [])
                 $log.log('no removal');
             });
 
+        };
+    })
+
+    .factory('PersonCache', function () {
+        var personCache = [];
+
+        function addPerson(person) {
+            personCache.unshift(person);
+        }
+
+        function setPersons(persons) {
+            personCache.length = 0;
+            var i;
+            for (i = 0; i < persons.length; i++) {
+                personCache.push(persons[i]);
+            }
+        }
+
+        function getPersons() {
+            return personCache;
+        }
+
+        return {
+            addPerson: addPerson,
+            setPersons: setPersons,
+            getPersons: getPersons
         };
     })
 
