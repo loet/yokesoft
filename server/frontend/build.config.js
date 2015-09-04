@@ -9,6 +9,7 @@ module.exports = {
      */
     build_dir: 'build',
     compile_dir: 'dist',
+    cordova_dir: '../../cordova/yokesoft/www',
 
     /**
      * This is a collection of file patterns that refer to our app code (the

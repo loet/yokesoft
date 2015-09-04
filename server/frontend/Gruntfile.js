@@ -86,10 +86,22 @@ module.exports = function (grunt) {
         /**
          * The directories to delete when `grunt clean` is executed.
          */
-        clean: [
-            '<%= build_dir %>',
-            '<%= compile_dir %>'
-        ],
+        //clean: [
+        //    '<%= build_dir %>',
+        //    '<%= compile_dir %>',
+        //    '<%= cordova_dir %>'
+        //],
+
+        clean: {
+            build: ['<%= build_dir %>'],
+            compile: ['<%= compile_dir %>'],
+            cordova: {
+                src: ['<%= cordova_dir %>'],
+                options: {
+                    force: true
+                }
+            }
+        },
 
         /**
          * The `copy` task just copies files from A to B. We use it here to copy
@@ -145,6 +157,17 @@ module.exports = function (grunt) {
                         dest: '<%= compile_dir %>/assets',
                         cwd: '<%= build_dir %>/assets',
                         expand: true
+                    }
+                ]
+            },
+            prepare_cordova: {
+                files: [
+                    {
+                        src: ['**'],
+                        dest: '<%= cordova_dir %>',
+                        cwd: '<%= build_dir %>',
+                        expand: true,
+                        flatten: false
                     }
                 ]
             }
@@ -223,7 +246,7 @@ module.exports = function (grunt) {
          */
         less: {
             build: {
-                src:'<%= app_files.less %>',
+                src: '<%= app_files.less %>',
                 dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>-tmp.css'
                 //files: {
                 //    //'<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': '<%= app_files.less %>'
@@ -512,7 +535,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean', 'html2js', 'jshint', 'less:build',
         'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-        'copy:build_appjs', 'copy:build_vendorjs', 'index:build'
+        'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'copy:prepare_cordova'
     ]);
 
     /**
