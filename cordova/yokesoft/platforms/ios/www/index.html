@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="yokesoft" ng-controller="AppCtrl">
+
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+<!-- compiled CSS -->
+<link rel="stylesheet" type="text/css" href="assets/yokesoft-0.0.2.css"/>
+
+
+<!-- compiled JavaScript -->
+<script type="text/javascript" src="vendor/angular/angular.js"></script>
+
+<script type="text/javascript" src="vendor/angular-route/angular-route.js"></script>
+
+<script type="text/javascript" src="vendor/angular-aria/angular-aria.js"></script>
+
+<script type="text/javascript" src="vendor/angular-animate/angular-animate.js"></script>
+
+<script type="text/javascript" src="vendor/angular-material/angular-material.js"></script>
+
+<script type="text/javascript" src="vendor/lodash/lodash.js"></script>
+
+<script type="text/javascript" src="vendor/socket.io-client/socket.io.js"></script>
+
+<script type="text/javascript" src="src/app/app.js"></script>
+
+<script type="text/javascript" src="src/app/configuration.js"></script>
+
+<script type="text/javascript" src="src/app/person/person.js"></script>
+
+<script type="text/javascript" src="src/app/socket.js"></script>
+
+<script type="text/javascript" src="templates-common.js"></script>
+
+<script type="text/javascript" src="templates-app.js"></script>
+
+
+</head>
+<body layout="row">
+
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
+            md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar ng-controller="LeftCtrl">
+        <h1 class="md-toolbar-tools"><a href="#/" ng-click="closeNavigation()">Yokesoft</a></h1>
+    </md-toolbar>
+    <md-content layout-padding ng-controller="LeftCtrl">
+        <!--<md-button ng-click="closeNavigation()" class="md-primary" hide-gt-md>-->
+        <!--Close Sidenav Left-->
+        <!--</md-button>-->
+        <!--<p hide-md hide-sm>-->
+        <!--gt md now-->
+        <!--</p>-->
+
+        <!--<p hide-gt-md>-->
+        <!--lt md now-->
+        <!--</p>-->
+        <nav class="leftnav">
+            <ul>
+                <li>
+                    <md-button type="button" ng-href="#/personlist" ng-click="closeNavigation()">Personen</md-button>
+            </ul>
+        </nav>
+
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
+
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
+
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
+
+        <!--<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text-->
+        <!--</p>-->
+
+
+    </md-content>
+</md-sidenav>
+
+<div layout="column" role="main" flex ng-view>
+
+
+</div>
+
+<!--<script>-->
+    <!--var socket = io();-->
+    <!--socket.on('connect', function () {-->
+        <!--console.log('connected to socket.io');-->
+    <!--});-->
+    <!--socket.on('connections', function (msg) {-->
+        <!--console.log(msg.msg);-->
+    <!--});-->
+    <!--socket.on('person', function (msg) {-->
+        <!--console.log('person: ' + msg.action + ', data: ' + JSON.stringify(msg.data))-->
+    <!--});-->
+<!--</script>-->
+
+</body>
+</html>

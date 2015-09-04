@@ -7,7 +7,8 @@ var socketIO = require('./backend/app/config/socket.io'),
     io = socketIO.io,
     livereload = require('express-livereload'),
     bodyParser = require('body-parser'),
-    port, pingRouter, personRouter;
+    cors = require('cors'),
+    port, pingRouter, personRouter, allowCrossDomain;
 
 io.on('connection', function (socket) {
     io.emit('connections', {action: 'connected', msg: 'a new user connected'});
@@ -35,6 +36,9 @@ io.on('connection', function (socket) {
 //parse json objects in request body
 app.use(bodyParser.json());
 
+app.use(cors());
+
+
 //connect to db
 require('./backend/app/config/mongodb');
 
@@ -50,7 +54,7 @@ app.use('/api/persons', personRouter);
 if (process.env.NODE_ENV === 'development') {
     /* dev mode */
     app.use(express.static('./frontend/build'));
-    livereload(app, config = {watchDir: './frontend/build'});
+    //livereload(app, config = {watchDir: './frontend/build'});
     console.log('using watching frontend build');
 } else {
     /* production mode */
@@ -62,6 +66,6 @@ module.exports = app;
 
 
 // START THE SERVER
-port = process.env.PORT || 8080;        // set our port
+port = process.env.PORT || 8000;        // set our port
 server.listen(port);
 console.log('Server running on port ' + port);
