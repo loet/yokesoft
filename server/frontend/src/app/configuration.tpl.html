@@ -1,0 +1,26 @@
+<md-toolbar class="md-whiteframe-glow-z1 md-default-theme">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" hide-gt-md>
+            <md-icon md-svg-icon="assets/img/menu.svg"></md-icon>
+        </md-button>
+        <h2>
+            <span>Home</span>
+        </h2>
+        <span flex></span>
+
+    </div>
+</md-toolbar>
+<md-content layout-padding>
+    <form name="configForm" id="configForm" novalidate>
+        <div layout="row" layout-sm="column">
+            <md-input-container flex>
+                <label>Backend Address</label>
+                <input ng-model="configurationCtrl.configuration.backendAddress">
+            </md-input-container>
+        </div>
+        <section layout="row" layout-sm="row" layout-align="end center">
+            <md-button type="submit" class="md-primary" ng-click="configurationCtrl.saveBackendAddress()">Speichern
+            </md-button>
+        </section>
+    </form>
+</md-content>
