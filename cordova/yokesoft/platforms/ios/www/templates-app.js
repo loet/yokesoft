@@ -1,4 +1,34 @@
-angular.module('templates-app', ['home.tpl.html', 'person/person.tpl.html', 'person/personlist.tpl.html']);
+angular.module('templates-app', ['configuration.tpl.html', 'home.tpl.html', 'person/person.tpl.html', 'person/personlist.tpl.html']);
+
+angular.module("configuration.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("configuration.tpl.html",
+    "<md-toolbar class=\"md-whiteframe-glow-z1 md-default-theme\">\n" +
+    "    <div class=\"md-toolbar-tools\">\n" +
+    "        <md-button class=\"md-icon-button\" aria-label=\"Menu\" ng-click=\"toggleLeft()\" hide-gt-md>\n" +
+    "            <md-icon md-svg-icon=\"assets/img/menu.svg\"></md-icon>\n" +
+    "        </md-button>\n" +
+    "        <h2>\n" +
+    "            <span>Home</span>\n" +
+    "        </h2>\n" +
+    "        <span flex></span>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-toolbar>\n" +
+    "<md-content layout-padding>\n" +
+    "    <form name=\"configForm\" id=\"configForm\" novalidate>\n" +
+    "        <div layout=\"row\" layout-sm=\"column\">\n" +
+    "            <md-input-container flex>\n" +
+    "                <label>Backend Address</label>\n" +
+    "                <input ng-model=\"configurationCtrl.configuration.backendAddress\">\n" +
+    "            </md-input-container>\n" +
+    "        </div>\n" +
+    "        <section layout=\"row\" layout-sm=\"row\" layout-align=\"end center\">\n" +
+    "            <md-button type=\"submit\" class=\"md-primary\" ng-click=\"configurationCtrl.saveBackendAddress()\">Speichern\n" +
+    "            </md-button>\n" +
+    "        </section>\n" +
+    "    </form>\n" +
+    "</md-content>");
+}]);
 
 angular.module("home.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home.tpl.html",
