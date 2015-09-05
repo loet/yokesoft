@@ -2,7 +2,7 @@ angular.module('yokesoft.configuration', [])
 
     .factory('Configuration', function () {
 
-        var backendAddress = 'http://192.168.0.11:8000';
+        var backendAddress = 'http://104.236.216.125:8000';
 
         function setBackendAddress(address) {
             backendAddress = address;
