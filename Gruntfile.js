@@ -114,7 +114,7 @@ module.exports = function (grunt) {
                     {
                         src: ['**'],
                         dest: '<%= build_dir %>/assets/',
-                        cwd: 'src/assets',
+                        cwd: '<%= src_dir %>/assets',
                         expand: true
                     }
                 ]
@@ -199,7 +199,7 @@ module.exports = function (grunt) {
                 src: [
                     '<%= vendor_files.js %>',
                     'module.prefix',
-                    '<%= build_dir %>/src/**/*.js',
+                    '<%= build_dir %>/<%= src_dir %>/**/*.js',
                     '<%= html2js.app.dest %>',
                     '<%= html2js.common.dest %>',
                     'module.suffix'
@@ -271,7 +271,7 @@ module.exports = function (grunt) {
          * are linted based on the policies listed in `options`. But we can also
          * specify exclusionary patterns by prefixing them with an exclamation
          * point (!); this is useful when code comes from a third party but is
-         * nonetheless inside `src/`.
+         * nonetheless inside `<%= src_dir %>/`.
          */
         jshint: {
             src: [
@@ -321,22 +321,22 @@ module.exports = function (grunt) {
          */
         html2js: {
             /**
-             * These are the templates from `src/app`.
+             * These are the templates from `<%= src_dir %>/app`.
              */
             app: {
                 options: {
-                    base: 'src/app'
+                    base: '<%= src_dir %>/app'
                 },
                 src: ['<%= app_files.atpl %>'],
                 dest: '<%= build_dir %>/templates-app.js'
             },
 
             /**
-             * These are the templates from `src/common`.
+             * These are the templates from `<%= src_dir %>/common`.
              */
             common: {
                 options: {
-                    base: 'src/common'
+                    base: '<%= src_dir %>/common'
                 },
                 src: ['<%= app_files.ctpl %>'],
                 dest: '<%= build_dir %>/templates-common.js'
@@ -375,7 +375,7 @@ module.exports = function (grunt) {
                 dir: '<%= build_dir %>',
                 src: [
                     '<%= vendor_files.js %>',
-                    '<%= build_dir %>/src/**/*.js',
+                    '<%= build_dir %>/<%= src_dir %>/**/*.js',
                     '<%= html2js.common.dest %>',
                     '<%= html2js.app.dest %>',
                     '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
@@ -463,7 +463,7 @@ module.exports = function (grunt) {
              */
             assets: {
                 files: [
-                    'src/assets/**/*'
+                    '<%= src_dir %>/assets/**/*'
                 ],
                 tasks: ['copy:build_app_assets', 'copy:build_vendor_assets']
             },
@@ -491,7 +491,7 @@ module.exports = function (grunt) {
              * When the CSS files change, we need to compile and minify them.
              */
             less: {
-                files: ['src/**/*.less'],
+                files: ['<%= src_dir %>/**/*.less'],
                 tasks: ['less:build', 'concat:']
             }
 
@@ -579,7 +579,7 @@ module.exports = function (grunt) {
             return file.replace(dirRE, '');
         });
 
-        grunt.file.copy('src/index.html', this.data.dir + '/index.html', {
+        grunt.file.copy('server/frontend/src/index.html', this.data.dir + '/index.html', {
             process: function (contents, path) {
                 return grunt.template.process(contents, {
                     data: {
