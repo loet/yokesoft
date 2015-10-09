@@ -1,4 +1,4 @@
-npm install -f forever
+npm install -g forever
 npm install
 bower install --allow-root
 grunt
