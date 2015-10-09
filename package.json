@@ -29,7 +29,6 @@
     "grunt": "~0.4.1",
     "grunt-auto-install": "^0.2.4",
     "grunt-bump": "0.0.6",
-    "grunt-coffeelint": "~0.0.10",
     "grunt-contrib-clean": "^0.4.1",
     "grunt-contrib-concat": "^0.3.0",
     "grunt-contrib-copy": "^0.4.1",
