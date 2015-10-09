@@ -1,5 +1,5 @@
-/cordova/yokesoft
 .idea/
 /bower_components
 /node_modules
+/cordova
 tmp/

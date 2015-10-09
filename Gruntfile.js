@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     //grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-ngmin');
     grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks('grunt-cordovacli');
 
 
     /**
@@ -30,6 +31,45 @@ module.exports = function (grunt) {
      * instructions.
      */
     var taskConfig = {
+
+
+        cordovacli: {
+            options: {
+                path: 'cordova',
+                cli: 'cordova'  // cca or cordova
+            },
+            //cordova: {
+            //    options: {
+            //        command: ['create', 'platform', 'plugin', 'build'],
+            //        platforms: ['ios'],
+            //        plugins: ['device', 'dialogs'],
+            //        path: 'cordova',
+            //        id: 'io.cordova.hellocordova',
+            //        name: 'HelloCordova'
+            //    }
+            //},
+            create: {
+                options: {
+                    command: 'create',
+                    id: 'ch.yokesoft',
+                    name: 'Yokesoft'
+                }
+            },
+            add_platforms: {
+                options: {
+                    command: 'platform',
+                    action: 'add',
+                    platforms: ['ios']
+                }
+            },
+            build_ios: {
+                options: {
+                    command: 'build',
+                    platforms: ['ios']
+                }
+            }
+        },
+
         /**
          * We read in our `package.json` file so we can access the package name and
          * version. It's already there, so we don't repeat ourselves here.
@@ -98,6 +138,12 @@ module.exports = function (grunt) {
             compile: ['<%= compile_dir %>'],
             cordova: {
                 src: ['<%= cordova_dir %>'],
+                options: {
+                    force: true
+                }
+            },
+            cordova_all: {
+                src: ['<%= cordova_all_dir %>'],
                 options: {
                     force: true
                 }
@@ -536,7 +582,7 @@ module.exports = function (grunt) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask('build', [
-        'clean', 'html2js', 'jshint', 'less:build',
+        'clean:build', 'clean:compile', 'clean:cordova', 'html2js', 'jshint', 'less:build',
         'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
         'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'copy:prepare_cordova'
     ]);
@@ -548,6 +594,8 @@ module.exports = function (grunt) {
     grunt.registerTask('compile', [
         'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
+
+    grunt.registerTask('cordova', ['clean:cordova_all','cordovacli', 'build']);
 
     /**
      * A utility function to get all app JavaScript sources.

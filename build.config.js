@@ -9,7 +9,8 @@ module.exports = {
      */
     build_dir: './server/frontend/build',
     compile_dir: './server/frontend/dist',
-    cordova_dir: './cordova/yokesoft/www',
+    cordova_dir: './cordova/www',
+    cordova_all_dir: './cordova',
     src_dir: 'server/frontend/src',
 
     /**
