@@ -62,7 +62,10 @@ module.exports = function (grunt) {
         },
 
         auto_install: {
-            local: {}
+            local: {},
+            options: {
+                bower: '--allow-root'
+            }
         },
 
         /**
