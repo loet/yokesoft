@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-ngmin');
     grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks('grunt-auto-install');
 
     /**
      * Load in our build configuration file.
@@ -58,6 +59,10 @@ module.exports = function (grunt) {
                 dest: 'CHANGELOG.md',
                 template: 'changelog.tpl'
             }
+        },
+
+        auto_install: {
+            local: {}
         },
 
         /**
@@ -512,7 +517,9 @@ module.exports = function (grunt) {
         }
     };
 
-    grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
+    grunt.initConfig(
+        grunt.util._.extend(taskConfig, userConfig)
+    );
 
     /**
      * In order to make it safe to just compile or copy *only* what was changed,
@@ -533,7 +540,7 @@ module.exports = function (grunt) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask('build', [
-        'clean', 'html2js', 'jshint', 'less:build',
+        'clean', 'auto_install', 'html2js', 'jshint', 'less:build',
         'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
         'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'copy:prepare_cordova'
     ]);

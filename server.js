@@ -1,6 +1,6 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
-var socketIO = require('./backend/app/config/socket.io'),
+var socketIO = require('./server/backend/app/config/socket.io'),
     express = socketIO.express,
     app = socketIO.app,
     server = socketIO.server,
@@ -40,18 +40,21 @@ app.use(cors());
 
 
 //connect to db
-require('./backend/app/config/mongodb');
+require('./server/backend/app/config/mongodb');
 
 //ping router
-pingRouter = require('./backend/app/routers/ping.routes.js');
+pingRouter = require('./server/backend/app/routers/ping.routes.js');
 app.use('/api', pingRouter);
 
 //person router
-personRouter = require('./backend/app/routers/person/person.routes.js');
+personRouter = require('./server/backend/app/routers/person/person.routes.js');
 app.use('/api/persons', personRouter);
 
-
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'forever') {
+    app.use(express.static('./server/frontend/build'));
+    //livereload(app, config = {watchDir: './frontend/build'});
+    console.log('using watching frontend build');
+} else if (process.env.NODE_ENV === 'development') {
     /* dev mode */
     app.use(express.static('./frontend/build'));
     //livereload(app, config = {watchDir: './frontend/build'});
