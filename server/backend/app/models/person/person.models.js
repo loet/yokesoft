@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
         teacher: Boolean,
         student: Boolean,
         teacherqualifications: [String],
+        imageData: String,
         savedAt: {type: Number, required: true}
     });
 

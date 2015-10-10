@@ -13,6 +13,11 @@
 
 <md-content layout-padding>
     <form name="personForm" id="personForm" novalidate>
+        <div layout="row" ng-controller="PictureCtrl as pictureCtrl">
+            <md-button type="button" ng-click="pictureCtrl.takePicture()">Bild hinzufügen</md-button>
+            <img id="personImage">
+            <!--<div>{{pictureCtrl.imageData}}</div>-->
+        </div>
         <div layout="row" layout-sm="column">
             <md-input-container flex="40" flex-sm="100">
                 <label>Vorname</label>
@@ -103,11 +108,7 @@
         </section>
     </form>
 
-    <div ng-controller="PictureCtrl as pictureCtrl">{{pictureCtrl.hello}}
-        <button ng-click="pictureCtrl.takePicture()">take picture</button>
-        <img id="myImage">
-        <div>{{pictureCtrl.imageData}}</div>
-    </div>
+
 </md-content>
 
 <div flex></div>

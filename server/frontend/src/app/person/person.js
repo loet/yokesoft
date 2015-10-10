@@ -167,15 +167,19 @@ angular.module('yokesoft.person', [])
     .controller('PictureCtrl', function ($scope, $cordovaCamera) {
 
         var ctrl = this;
-        ctrl.hello = 'hi PictureCtrl';
+
+        function setImageSrc() {
+            document.getElementById('personImage').src = "data:image/jpeg;base64," + $scope.person.imageData;
+        }
+
+        if ($scope.person && $scope.person.imageData) {
+            setImageSrc();
+        }
 
         //document.addEventListener("deviceready", function () {
 
 
-
-
         ctrl.takePicture = function () {
-            ctrl.hello = 'take picure called';
 
             var options = {
                 quality: 50,
@@ -191,9 +195,8 @@ angular.module('yokesoft.person', [])
             };
 
             $cordovaCamera.getPicture(options).then(function (imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
-                ctrl.imageData = imageData;
+                $scope.person.imageData = imageData;
+                setImageSrc();
             }, function (err) {
                 // error
             });
