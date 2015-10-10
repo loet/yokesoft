@@ -2,6 +2,7 @@ angular.module('yokesoft', [
     'yokesoft.socket',
     'ngRoute',
     'ngMaterial',
+    'ngCordova',
     'templates-app', 'yokesoft.configuration',
     'yokesoft.person'
 ])

@@ -62,6 +62,15 @@ module.exports = function (grunt) {
                     platforms: ['ios']
                 }
             },
+            add_plugins: {
+                options: {
+                    command: 'plugin',
+                    action: 'add',
+                    plugins: [
+                        'camera'
+                    ]
+                }
+            },
             build_ios: {
                 options: {
                     command: 'build',

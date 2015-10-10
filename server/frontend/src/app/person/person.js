@@ -164,6 +164,43 @@ angular.module('yokesoft.person', [])
         };
     })
 
+    .controller('PictureCtrl', function ($scope, $cordovaCamera) {
+
+        var ctrl = this;
+        ctrl.hello = 'hi PictureCtrl';
+
+        //document.addEventListener("deviceready", function () {
+
+
+
+
+        ctrl.takePicture = function () {
+            ctrl.hello = 'take picure called';
+
+            var options = {
+                quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                allowEdit: true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 100,
+                targetHeight: 100,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false,
+                correctOrientation: true
+            };
+
+            $cordovaCamera.getPicture(options).then(function (imageData) {
+                var image = document.getElementById('myImage');
+                image.src = "data:image/jpeg;base64," + imageData;
+            }, function (err) {
+                // error
+            });
+        };
+
+        //}, false);
+    })
+
     .factory('PersonCache', function () {
         var personCache = [];
 
@@ -213,7 +250,7 @@ angular.module('yokesoft.person', [])
 
         function getAllPersons() {
             var dfd = $q.defer();
-            $http.get(Configuration.getBackendAddress()+'/api/persons')
+            $http.get(Configuration.getBackendAddress() + '/api/persons')
                 .then(function (response) {
                     dfd.resolve(response.data);
                 }, function (response) {
@@ -224,7 +261,7 @@ angular.module('yokesoft.person', [])
 
         function getPerson(id) {
             var dfd = $q.defer();
-            $http.get(Configuration.getBackendAddress()+'/api/persons/' + id)
+            $http.get(Configuration.getBackendAddress() + '/api/persons/' + id)
                 .then(function (response) {
                     dfd.resolve(response.data);
                 }, function (response) {
@@ -235,7 +272,7 @@ angular.module('yokesoft.person', [])
 
         function updatePerson(person) {
             var dfd = $q.defer();
-            $http.put(Configuration.getBackendAddress()+'/api/persons/' + person._id, person)
+            $http.put(Configuration.getBackendAddress() + '/api/persons/' + person._id, person)
                 .then(function (response) {
                     dfd.resolve(response.data);
                 }, function (response) {
@@ -246,7 +283,7 @@ angular.module('yokesoft.person', [])
 
         function createPerson(person) {
             var dfd = $q.defer();
-            $http.post(Configuration.getBackendAddress()+'/api/persons', person)
+            $http.post(Configuration.getBackendAddress() + '/api/persons', person)
                 .then(function (response) {
                     dfd.resolve(response.data);
                 }, function (response) {
@@ -257,7 +294,7 @@ angular.module('yokesoft.person', [])
 
         function removePerson(id) {
             var dfd = $q.defer();
-            $http['delete'](Configuration.getBackendAddress()+'/api/persons/' + id)
+            $http['delete'](Configuration.getBackendAddress() + '/api/persons/' + id)
                 .then(function (response) {
                     dfd.resolve(response.data);
                 }, function (response) {

@@ -70,7 +70,8 @@ module.exports = {
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-material/angular-material.js',
             'bower_components/lodash/lodash.js',
-            'bower_components/socket.io-client/socket.io.js'
+            'bower_components/socket.io-client/socket.io.js',
+            'bower_components/ngCordova/dist/ng-cordova.js'
         ],
         css: [
             'bower_components/angular-material/angular-material.css'

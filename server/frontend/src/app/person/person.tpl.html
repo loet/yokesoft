@@ -65,7 +65,8 @@
         </md-input-container>
         <div layout="row">
             <md-input-container>
-                <md-checkbox class="md-primary" ng-model="person.teacher" aria-label="Teacher" ng-change="processTeacherSelection()">
+                <md-checkbox class="md-primary" ng-model="person.teacher" aria-label="Teacher"
+                             ng-change="processTeacherSelection()">
                     Lehrer
                 </md-checkbox>
             </md-input-container>
@@ -78,6 +79,7 @@
 
         <div layout="row" ng-if="person.teacher" class="fade">
             <label style="margin: 12px 20px 0px 10px">Lehrer Qualifikationen</label>
+
             <div layout="column">
                 <div ng-repeat="qualification in teacherqualifications">
                     <md-checkbox class="md-primary" ng-model="selectedteacherqualification[qualification]">
@@ -100,6 +102,10 @@
             </md-button>
         </section>
     </form>
+
+    <div ng-controller="PictureCtrl as pictureCtrl">{{pictureCtrl.hello}}
+        <button ng-click="pictureCtrl.takePicture()">take picture</button>
+        <img id="myImage"></div>
 </md-content>
 
 <div flex></div>
