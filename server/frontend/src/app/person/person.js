@@ -193,6 +193,7 @@ angular.module('yokesoft.person', [])
             $cordovaCamera.getPicture(options).then(function (imageData) {
                 var image = document.getElementById('myImage');
                 image.src = "data:image/jpeg;base64," + imageData;
+                ctrl.imageData = imageData;
             }, function (err) {
                 // error
             });

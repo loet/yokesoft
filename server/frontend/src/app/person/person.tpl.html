@@ -105,7 +105,9 @@
 
     <div ng-controller="PictureCtrl as pictureCtrl">{{pictureCtrl.hello}}
         <button ng-click="pictureCtrl.takePicture()">take picture</button>
-        <img id="myImage"></div>
+        <img id="myImage">
+        <div>{{pictureCtrl.imageData}}</div>
+    </div>
 </md-content>
 
 <div flex></div>

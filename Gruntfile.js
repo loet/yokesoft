@@ -593,7 +593,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:build', 'clean:compile', 'clean:cordova', 'html2js', 'jshint', 'less:build',
         'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-        'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'copy:prepare_cordova'
+        'copy:build_appjs', 'copy:build_vendorjs', 'index:build'
     ]);
 
     /**
@@ -604,7 +604,7 @@ module.exports = function (grunt) {
         'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
     ]);
 
-    grunt.registerTask('cordova', ['clean:cordova_all','cordovacli', 'build']);
+    grunt.registerTask('cordova', ['clean:cordova_all', 'build', 'cordovacli', 'copy:prepare_cordova']);
 
     /**
      * A utility function to get all app JavaScript sources.
