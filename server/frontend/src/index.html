@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="yokesoft" ng-controller="AppCtrl">
+<html ng-controller="AppCtrl">
 
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
 <meta charset="utf-8">
@@ -79,18 +79,23 @@
 
 </div>
 
-<!--<script>-->
-<!--var socket = io();-->
-<!--socket.on('connect', function () {-->
-<!--console.log('connected to socket.io');-->
-<!--});-->
-<!--socket.on('connections', function (msg) {-->
-<!--console.log(msg.msg);-->
-<!--});-->
-<!--socket.on('person', function (msg) {-->
-<!--console.log('person: ' + msg.action + ', data: ' + JSON.stringify(msg.data))-->
-<!--});-->
-<!--</script>-->
+<script>
+    function bootstrapAngular() {
+        console.log("Bootstrapping AngularJS");
+        angular.bootstrap(document, ['yokesoft']);
+    }
+    // This is my preferred Cordova detection method, as it doesn't require updating.
+    if (document.URL.indexOf('http://') === -1
+            && document.URL.indexOf('https://') === -1) {
+        console.log("URL: Running in Cordova/PhoneGap");
+        localStorage.setItem('runtime', 'cordova');
+        document.addEventListener("deviceready", bootstrapAngular, false);
+    } else {
+        console.log("URL: Running in browser");
+        localStorage.setItem('runtime', 'browser');
+        bootstrapAngular();
+    }
+</script>
 
 </body>
 </html>

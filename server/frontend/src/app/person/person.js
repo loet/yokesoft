@@ -176,6 +176,8 @@ angular.module('yokesoft.person', [])
             setImageSrc();
         }
 
+        ctrl.cordova = localStorage.getItem('runtime') === 'cordova';
+
         //document.addEventListener("deviceready", function () {
 
 
