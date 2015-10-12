@@ -67,7 +67,8 @@ module.exports = function (grunt) {
                     command: 'plugin',
                     action: 'add',
                     plugins: [
-                        'camera'
+                        'camera',
+                        'geolocation'
                     ]
                 }
             },

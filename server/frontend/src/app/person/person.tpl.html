@@ -19,6 +19,9 @@
             </md-button>
             <span ng-if="!(pictureCtrl.cordova === true)" style="font-size: xx-small; color: lightgrey">Bildaufnahme ist nur über Mobile App möglich</span>
         </div>
+        <div layout="row" ng-controller="GeolocationCtrl as geolocationCtrl">
+            <div>Koordinaten: {{person.position}}</div>
+        </div>
         <div layout="row" layout-sm="column">
             <md-input-container flex="40" flex-sm="100">
                 <label>Vorname</label>

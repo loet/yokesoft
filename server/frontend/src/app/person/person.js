@@ -207,6 +207,17 @@ angular.module('yokesoft.person', [])
         //}, false);
     })
 
+    .controller('GeolocationCtrl', function ($scope, $cordovaGeolocation, $log) {
+        var posOptions = {timeout: 10000, enableHighAccuracy: false};
+        $cordovaGeolocation
+            .getCurrentPosition(posOptions)
+            .then(function (position) {
+                $scope.person.position = position;
+            }, function (err) {
+                $log.error(err);
+            });
+    })
+
     .factory('PersonCache', function () {
         var personCache = [];
 
