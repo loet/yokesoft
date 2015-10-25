@@ -19,24 +19,22 @@
             </md-button>
             <span ng-if="!(pictureCtrl.cordova === true)" style="font-size: xx-small; color: lightgrey">Bildaufnahme ist nur über Mobile App möglich</span>
         </div>
-        <div layout="row" ng-controller="GeolocationCtrl as geolocationCtrl">
-            <div>Koordinaten: {{person.position}}</div>
-        </div>
-        <div layout="row" layout-sm="column">
-            <md-input-container flex="40" flex-sm="100">
-                <label>Vorname</label>
-                <input ng-model="person.firstname">
-            </md-input-container>
-            <md-input-container flex>
-                <label>Name</label>
-                <input name="lastname" ng-model="person.lastname" required>
+        <!--<div layout="row" ng-controller="GeolocationCtrl as geolocationCtrl">-->
+        <!--<div>Koordinaten: {{person.position}}</div>-->
+        <!--</div>-->
+        <md-input-container>
+            <label>Vorname</label>
+            <input ng-model="person.firstname">
+        </md-input-container>
+        <md-input-container>
+            <label>Name</label>
+            <input name="lastname" ng-model="person.lastname" required>
 
-                <div ng-messages="personForm.lastname.$error">
-                    <div ng-message="required" ng-if="personForm.lastname.$error.required">Dies ist ein Pflichtfeld.
-                    </div>
+            <div ng-messages="personForm.lastname.$error">
+                <div ng-message="required" ng-if="personForm.lastname.$error.required">Dies ist ein Pflichtfeld.
                 </div>
-            </md-input-container>
-        </div>
+            </div>
+        </md-input-container>
         <md-input-container>
             <label>E-Mail</label>
             <input name="email" ng-model="person.email" type="email" required="true">
@@ -54,19 +52,19 @@
             <label>Adresse</label>
             <input ng-model="person.street">
         </md-input-container>
-        <div layout="row" layout-sm="column">
-            <md-input-container flex="40" flex-sm="100">
-                <label>PLZ</label>
-                <input ng-model="person.zip">
-            </md-input-container>
-            <md-input-container flex>
-                <label>Ort</label>
-                <input name="place" ng-model="person.place" required>
 
-                <div ng-messages="personForm.place.$error">
-                    <div ng-message="required" ng-if="personForm.place.$error.required">Dies ist ein Pflichtfeld.</div>
-                </div>
-            </md-input-container>
+        <md-input-container>
+            <label>PLZ</label>
+            <input ng-model="person.zip">
+        </md-input-container>
+        <md-input-container>
+            <label>Ort</label>
+            <input name="place" ng-model="person.place" required>
+
+            <div ng-messages="personForm.place.$error">
+                <div ng-message="required" ng-if="personForm.place.$error.required">Dies ist ein Pflichtfeld.</div>
+            </div>
+        </md-input-container>
         </div>
         <md-input-container flex>
             <label>Land</label>
